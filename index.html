@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aviator Predictor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    header {
+      width: 100%;
+      background-color: #e53935;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .logo {
+      margin: 20px;
+      font-size: 50px;
+      color: #e53935;
+    }
+
+    .multiplier-circle {
+      width: 160px;
+      height: 160px;
+      border: 5px solid #e53935;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin: 10px auto 20px auto;
+    }
+
+    .start-button {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+
+    .start-button:hover {
+      background-color: #c62828;
+    }
+
+    footer {
+      font-size: 14px;
+      color: #888;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 500px) {
+      .multiplier-circle {
+        width: 120px;
+        height: 120px;
+        font-size: 22px;
+      }
+
+      .start-button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>🛩 Aviator Predictor</header>
+
+  <div class="logo">✈️</div>
+
+  <div class="multiplier-circle" id="multiplier">0.00x</div>
+
+  <button class="start-button" id="startBtn" onclick="startPrediction()">Start</button>
+
+  <footer>
+    Application by Zeeshan Khan<br>
+    UID: 765388
+  </footer>
+
+  <script>
+    let intervalId = null;
+
+    function generateMultiplier() {
+      let random = (Math.random() * 199 + 1).toFixed(2);
+      document.getElementById('multiplier').innerText = `${random}x`;
+    }
+
+    function startPrediction() {
+      // Disable button after first click
+      const btn = document.getElementById('startBtn');
+      btn.disabled = true;
+      btn.innerText = "Running...";
+
+      // First manual prediction
+      generateMultiplier();
+
+      // Repeat every 16 seconds
+      intervalId = setInterval(generateMultiplier, 16000);
+    }
+  </script>
+
+</body>
+</html>
