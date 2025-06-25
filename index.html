@@ -53,11 +53,32 @@
       font-size: 18px;
       border-radius: 8px;
       cursor: pointer;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .start-button:hover {
       background-color: #c62828;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      text-decoration: none;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #388e3c;
     }
 
     footer {
@@ -78,6 +99,16 @@
         padding: 10px 20px;
         font-size: 16px;
       }
+
+      .btn {
+        font-size: 14px;
+        padding: 8px 15px;
+      }
+
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -89,7 +120,12 @@
 
   <div class="multiplier-circle" id="multiplier">0.00x</div>
 
-  <button class="start-button" id="startBtn" onclick="startPrediction()">Start</button>
+  <button class="start-button" onclick="nextMultiplier()">سٹارٹ</button>
+
+  <div class="buttons">
+    <a class="btn" href="https://www.fantasygems16.com/#/register?invitationCode=22386407377" target="_blank">🎮 Fantasy+</a>
+    <a class="btn" href="https://chat.whatsapp.com/GwQUtQyR5FxDovGCvauX7y" target="_blank">💬 WhatsApp Group</a>
+  </div>
 
   <footer>
     Application by Zeeshan Khan<br>
@@ -97,24 +133,26 @@
   </footer>
 
   <script>
-    let intervalId = null;
+    const multipliers = [
+      "4.68x", "2.58x", "1.97x", "1.00x", "1.69x",
+      "1.45x", "1.39x", "2.97x", "3.59x", "2.66x",
+      "1.81x", "1.30x", "1.02x", "1.17x", "3.55x",
+      "1.76x", "1.46x", "4.83x", "1.87x", "1.21x",
+      "2.51x", "1.59x", "1.37x", "4.09x", "1.12x",
+      "10.46x", "4.13x", "2.12x", "1.00x", "1.45x",
+      "1.93x", "3.28x", "5.83x", "3.97x", "1.44x",
+      "1.15x", "5.48x", "1.18x", "1.94x", "2.04x",
+      "2.98x", "2.08x", "2.11x", "1.14x", "1.51x",
+      "1.11x", "1.29x", "1.10x", "1.00x", "1.46x",
+      "3.40x"
+    ];
 
-    function generateMultiplier() {
-      let random = (Math.random() * 199 + 1).toFixed(2);
-      document.getElementById('multiplier').innerText = `${random}x`;
-    }
+    let currentIndex = 0;
 
-    function startPrediction() {
-      // Disable button after first click
-      const btn = document.getElementById('startBtn');
-      btn.disabled = true;
-      btn.innerText = "Running...";
-
-      // First manual prediction
-      generateMultiplier();
-
-      // Repeat every 16 seconds
-      intervalId = setInterval(generateMultiplier, 16000);
+    function nextMultiplier() {
+      const multiplierDisplay = document.getElementById('multiplier');
+      multiplierDisplay.innerText = multipliers[currentIndex];
+      currentIndex = (currentIndex + 1) % multipliers.length;
     }
   </script>
 
